@@ -133,7 +133,7 @@ function App() {
             </div>
 
           </aside>
-          <div className="result-content ">
+          <div className="result-content result-content_grid">
 
             {
               products.map(item => <Item key={item.id} {...item}/>)

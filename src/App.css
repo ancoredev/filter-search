@@ -161,7 +161,31 @@ body{
   align-items: center;
 }
 
+/* grid item */
 
+.result-content_grid {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
 
+.result-content_grid p {
+  margin-top: 15%;
+}
+.result-content_grid .item {
+  flex-direction: column;
+  width: 220px;
+}
+
+.result-content_grid .item__img,
+.result-content_grid .item__img img,
+.result-content_grid .item__content {
+  width: 220px;
+}
+
+.result-content_grid .item__content {
+  padding-left: 0;
+  height: 100%;
+}
 
 
