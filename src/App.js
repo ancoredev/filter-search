@@ -14,8 +14,18 @@ import ViewModuleIcon from '@mui/icons-material/ViewModule';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 import './App.css'
+import { useEffect, useState } from 'react';
+
+import Item from './components/Item';
 
 function App() {
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    fetch("https://dummyjson.com/products?limit=10")
+      .then(response => response.json())
+      .then(json => setProducts(json.products));
+  },[]);
+
   return (
     <div className="App">
       <div className="search-container">
@@ -123,39 +133,11 @@ function App() {
             </div>
 
           </aside>
-          <div className="result-content result-content-grid">
+          <div className="result-content ">
 
-            <div className="item">
-              <div className="item__img">
-                <img src="https://i.dummyjson.com/data/products/2/thumbnail.jpg" alt="" /> 
-              </div>
-              <div className="item__content">
-                <p className="item__title">iPhone X <span>Apple</span></p>
-                <div className="rate">
-                  <Rating
-                    name="simple-controlled"
-                    value={4.4}
-                    precision={0.1}
-                    onChange={() => {}}
-                    readOnly
-                  />
-                </div>
-                <div className="item__desc">SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...</div> 
-                <div className="item__action-group">
-                  <div className="item__buy">
-                    <Button 
-                      variant="contained" 
-                      size="small"
-                      disableElevation
-                    >Buy</Button>
-                    <button className="item__like"><FavoriteBorderIcon/></button>
-                  </div>
-                  <div className="item__stock">
-                    stock: 38
-                  </div>
-                </div>
-              </div>
-            </div>
+            {
+              products.map(item => <Item key={item.id} {...item}/>)
+            }
 
           </div>
         </div>  
