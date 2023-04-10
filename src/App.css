@@ -37,7 +37,11 @@ body{
 }
 
 .search-bar__sort-by .MuiInputBase-root {
-  border-radius:  0 4px 4px 0;
+  border-radius:  0;
+}
+.search-bar__button .MuiButtonBase-root {
+  border-radius: 0 4px 4px 0;
+  height: 40px;
 }
 
 .MuiInputBase-root, .MuiToggleButtonGroup-root {
@@ -122,7 +126,7 @@ body{
   border: none;
 }
 .item__stock {
-  color: #b9b9b9
+  color: #b9b9b9;
 }
 
 /* item flex */
@@ -153,6 +157,7 @@ body{
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  margin-top: 35px;
 }
 
 .item__buy {
