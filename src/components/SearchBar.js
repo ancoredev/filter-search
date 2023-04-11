@@ -4,8 +4,15 @@ import { TextField, FormControl, InputLabel, Select, MenuItem, ToggleButtonGroup
 import ViewListIcon from '@mui/icons-material/ViewList';
 import ViewModuleIcon from '@mui/icons-material/ViewModule';
 
+import { useDispatch, useSelector } from 'react-redux'
+import { handleQuery, switchSortMethod } from '../features/filterSlice'
+
 
 const SearchBar = () => {
+  const dispatch = useDispatch();
+  const query = useSelector(state => state.filter.query);
+  const sortBy = useSelector(state => state.filter.sortBy);
+
   return (
     <>
     <h1 className="title">Products</h1>
@@ -17,6 +24,8 @@ const SearchBar = () => {
             label="Search" 
             variant="outlined" 
             size="small"
+            value={query}
+            onChange={e => dispatch(handleQuery({ query: e.target.value }))}
             fullWidth
           />
         </div>
@@ -26,22 +35,18 @@ const SearchBar = () => {
             <Select
               labelId="sort-select-label"
               id="sort-select"
-              value="toprate"
+              value={sortBy}
               label="Sort by"
-              onChange={() => {}}
+              onChange={e => dispatch(switchSortMethod({ sortBy: e.target.value }))}
               size="small"
             >
-              <MenuItem value="cheap">Сначала недорогие</MenuItem>
-              <MenuItem value="expensive">Сначала дорогие</MenuItem>
-              <MenuItem value="toprate">Сначала с лучшей оценкой</MenuItem>
+              <MenuItem value="cheap">Cheap first</MenuItem>
+              <MenuItem value="expensive">Expensive first</MenuItem>
+              <MenuItem value="toprated">Toprated first</MenuItem>
             </Select>
           </FormControl>
         </div>
-        <div className="search-bar__button">
-          <Button  variant="contained"  disableElevation>
-            Search
-          </Button>
-        </div>
+
       </div>
       <div className="search-bar__view">
         <ToggleButtonGroup

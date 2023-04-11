@@ -3,12 +3,12 @@ import React from 'react'
 import { Rating, Button } from '@mui/material'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 
-const Item = ({ thumbnail, title, brand, rating, description, stock }) => {
+const Item = ({ images, title, brand, rating, description, price }) => {
   return (
     <div className="item">
 
       <div className="item__img">
-        <img src={thumbnail} alt="" /> 
+        <img src={images[0]} alt="" /> 
       </div>
 
       <div className="item__content">
@@ -23,6 +23,7 @@ const Item = ({ thumbnail, title, brand, rating, description, stock }) => {
               onChange={() => {}}
               readOnly
             />
+            <span className="item__rate-label">{rating}</span>
           </div>
           <div className="item__desc">{description}</div>
         </div> 
@@ -36,8 +37,8 @@ const Item = ({ thumbnail, title, brand, rating, description, stock }) => {
             >Buy</Button>
             <button className="item__like"><FavoriteBorderIcon/></button>
           </div>
-          <div className="item__stock">
-            stock: {stock}
+          <div className="item__price">
+            {price}<span>$</span>
           </div>
         </div>
 

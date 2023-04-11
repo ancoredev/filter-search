@@ -1,7 +1,17 @@
 import React from 'react'
 import { TextField, Slider, FormControl, Select, MenuItem } from '@mui/material'
 
+import { useSelector, useDispatch } from 'react-redux'
+import { switchBrandShow } from '../features/filterSlice'
+
 const Filter = () => {
+  
+  const brandList = useSelector(state => state.filter.brandList);
+  const brand = useSelector(state => state.filter.brand);
+  const dispatch = useDispatch();
+
+  console.log(brandList);
+
   return (
     <aside className="filter">
 
@@ -46,13 +56,13 @@ const Filter = () => {
             <Select
               labelId="brand-select-label"
               id="brand-select"
-              value="notselected"
-              onChange={() => {}}
+              value={brand}
+              onChange={e => dispatch(switchBrandShow({brand: e.target.value}))}
               size="small"
             >
-              <MenuItem value="notselected">All Brands</MenuItem>
-              <MenuItem value="apple">Apple</MenuItem>
-              <MenuItem value="oppo">Oppo</MenuItem>
+              {
+                brandList.map(item => <MenuItem key={item} value={item}>{item}</MenuItem>)
+              }
             </Select>
           </FormControl>
         </div>
