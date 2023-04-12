@@ -1,6 +1,6 @@
 import './App.css'
 import { useEffect, useState } from 'react';
-import { useSelector,  useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import SearchBar from './components/SearchBar';
 import SearchResult from './components/SearchResult';
@@ -10,8 +10,6 @@ import { addToBrandList } from './features/filterSlice';
 
 function App() {
   const [products, setProducts] = useState([]);
-
-  const brandList = useSelector(state => state.filter.brandList)
   const dispatch = useDispatch();
 
   useEffect(() => {

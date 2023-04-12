@@ -4,11 +4,13 @@ import Item from './Item'
 
 import { useSelector } from 'react-redux'
 
-import { checkItemIfIncludes, sortByMethod } from '../utils/utils'
+import { checkItemBrand, checkItemIfIncludes, checkPriceRange, sortByMethod } from '../utils/utils'
 
 const SearchResult = ({ products }) => {
   const query = useSelector(state => state.filter.query);
   const sortBy = useSelector(state => state.filter.sortBy);
+  const brand = useSelector(state => state.filter.brand);
+  const priceRange = useSelector(state => state.filter.priceRange);
 
   return (
     <div className="search-result">
@@ -16,7 +18,9 @@ const SearchResult = ({ products }) => {
       <div className="result-content result-content_grid">
         {
           products
-            .filter(item => checkItemIfIncludes({ ...item}, query))
+            .filter(item => checkItemIfIncludes(item, query))
+            .filter(item => checkItemBrand(item, brand))
+            .filter(item => checkPriceRange(item, priceRange))
             .sort(sortByMethod(sortBy))
             .map(item => <Item key={item.id} {...item}
           />)

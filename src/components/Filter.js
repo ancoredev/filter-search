@@ -2,15 +2,14 @@ import React from 'react'
 import { TextField, Slider, FormControl, Select, MenuItem } from '@mui/material'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { switchBrandShow } from '../features/filterSlice'
+import { switchBrandShow, setPriceRange, setLowerPrice, setUpperPrice } from '../features/filterSlice'
 
 const Filter = () => {
   
   const brandList = useSelector(state => state.filter.brandList);
   const brand = useSelector(state => state.filter.brand);
+  const priceRange = useSelector(state => state.filter.priceRange);
   const dispatch = useDispatch();
-
-  console.log(brandList);
 
   return (
     <aside className="filter">
@@ -24,6 +23,9 @@ const Filter = () => {
               label="From" 
               variant="outlined" 
               size="small"
+              value={priceRange[0]}
+              onChange={e => dispatch(setLowerPrice({lowerPrice: e.target.value}))}
+              type="number"
               fullWidth
             />
           </div>
@@ -33,17 +35,20 @@ const Filter = () => {
               label="To" 
               variant="outlined" 
               size="small"
+              value={priceRange[1]}
+              onChange={e => dispatch(setUpperPrice({upperPrice: e.target.value}))}
+              type="number"
               fullWidth
             />
           </div>
         </div>
         <div className="slider-range">
           <Slider
-            getAriaLabel={() => 'Temperature range'}
-            value={[0, 500]}
-            onChange={() => {}}
+            value={priceRange}
+            onChange={e => dispatch(setPriceRange({priceRange: e.target.value}))}
             valueLabelDisplay="auto"
-            getAriaValueText={() => {}}
+            min={0}
+            max={2000}
             size="small"
           />
         </div>

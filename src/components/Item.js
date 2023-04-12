@@ -20,7 +20,6 @@ const Item = ({ images, title, brand, rating, description, price }) => {
               name="simple-controlled"
               value={rating}
               precision={0.1}
-              onChange={() => {}}
               readOnly
             />
             <span className="item__rate-label">{rating}</span>
