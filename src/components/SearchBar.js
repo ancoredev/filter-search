@@ -1,17 +1,19 @@
 import React from 'react'
 
-import { TextField, FormControl, InputLabel, Select, MenuItem, ToggleButtonGroup, ToggleButton, Button } from '@mui/material'
+import { TextField, FormControl, InputLabel, Select, MenuItem, ToggleButtonGroup, ToggleButton } from '@mui/material'
 import ViewListIcon from '@mui/icons-material/ViewList';
 import ViewModuleIcon from '@mui/icons-material/ViewModule';
 
 import { useDispatch, useSelector } from 'react-redux'
-import { handleQuery, switchSortMethod } from '../features/filterSlice'
+import { handleQuery, switchSortMethod, toggleView } from '../features/filterSlice'
 
 
 const SearchBar = () => {
   const dispatch = useDispatch();
   const query = useSelector(state => state.filter.query);
   const sortBy = useSelector(state => state.filter.sortBy);
+  const view = useSelector(state => state.filter.view);
+
 
   return (
     <>
@@ -51,13 +53,14 @@ const SearchBar = () => {
       <div className="search-bar__view">
         <ToggleButtonGroup
           size="small"
-          value="module"
-          onChange={() => {}}
+          value={view}
+          onChange={(e, newView) => { dispatch(toggleView({ view: newView }))}}
+          exclusive
         >
           <ToggleButton value="list" aria-label="list">
             <ViewListIcon />
           </ToggleButton>
-          <ToggleButton value="module" aria-label="module">
+          <ToggleButton value="grid" aria-label="grid">
             <ViewModuleIcon />
           </ToggleButton>
         </ToggleButtonGroup>

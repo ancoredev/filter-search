@@ -9,6 +9,7 @@ const filterSlice = createSlice({
     brand: "All brands",
     brandList: ["All brands"],
     priceRange: [0,2000],
+    view: "grid"
   },
   reducers: {
     handleQuery: ( state, action ) => {
@@ -48,6 +49,9 @@ const filterSlice = createSlice({
         state.priceRange = [state.priceRange[0], upperPrice];
       }
     },
+    toggleView: ( state, action ) => {
+      state.view = action.payload.view;
+    },
   }
 })
 
@@ -56,5 +60,6 @@ export const {
   switchSortMethod, 
   switchBrandShow, addToBrandList, // brand select actions
   setPriceRange, setLowerPrice, setUpperPrice,  // price range actions
+  toggleView,
   }  = filterSlice.actions;
 export default filterSlice.reducer;

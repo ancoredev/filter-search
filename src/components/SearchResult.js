@@ -11,11 +11,12 @@ const SearchResult = ({ products }) => {
   const sortBy = useSelector(state => state.filter.sortBy);
   const brand = useSelector(state => state.filter.brand);
   const priceRange = useSelector(state => state.filter.priceRange);
+  const view = useSelector(state => state.filter.view);
 
   return (
     <div className="search-result">
       <Filter />
-      <div className="result-content result-content_grid">
+      <div className={ view === "grid" ? "result-content result-content_grid" : "result-content"}>
         {
           products
             .filter(item => checkItemIfIncludes(item, query))
