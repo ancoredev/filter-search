@@ -24,7 +24,7 @@ const Filter = () => {
               variant="outlined" 
               size="small"
               value={priceRange[0]}
-              onChange={e => dispatch(setLowerPrice({lowerPrice: e.target.value}))}
+              onBlur={e => dispatch(setLowerPrice({lowerPrice: e.target.value}))}
               type="number"
               fullWidth
             />
@@ -36,7 +36,7 @@ const Filter = () => {
               variant="outlined" 
               size="small"
               value={priceRange[1]}
-              onChange={e => dispatch(setUpperPrice({upperPrice: e.target.value}))}
+              onBlur={e => dispatch(setUpperPrice({upperPrice: e.target.value}))}
               type="number"
               fullWidth
             />
