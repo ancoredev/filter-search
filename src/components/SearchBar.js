@@ -1,11 +1,11 @@
 import React from 'react'
 
-import { TextField, FormControl, InputLabel, Select, MenuItem, ToggleButtonGroup, ToggleButton } from '@mui/material'
-import ViewListIcon from '@mui/icons-material/ViewList';
-import ViewModuleIcon from '@mui/icons-material/ViewModule';
+import { TextField, FormControl, InputLabel, Select, MenuItem } from '@mui/material'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { handleQuery, switchSortMethod, toggleView } from '../features/filterSlice'
+
+import ToggleGroup from './ui/ToggleGroup';
 
 
 const SearchBar = () => {
@@ -19,6 +19,7 @@ const SearchBar = () => {
     <>
     <h1 className="title">Products</h1>
     <div className="search-bar">
+      
       <div className="search-bar__leftside">
         <div className="search-bar__input">
           <TextField 
@@ -31,40 +32,15 @@ const SearchBar = () => {
             fullWidth
           />
         </div>
-        <div className="search-bar__sort-by">
-          <FormControl fullWidth>
-            <InputLabel id="sort-select-label">Sort by</InputLabel>
-            <Select
-              labelId="sort-select-label"
-              id="sort-select"
-              value={sortBy}
-              label="Sort by"
-              onChange={e => dispatch(switchSortMethod({ sortBy: e.target.value }))}
-              size="small"
-            >
-              <MenuItem value="cheap">Cheap first</MenuItem>
-              <MenuItem value="expensive">Expensive first</MenuItem>
-              <MenuItem value="toprated">Toprated first</MenuItem>
-            </Select>
-          </FormControl>
-        </div>
-
       </div>
+
       <div className="search-bar__view">
-        <ToggleButtonGroup
-          size="small"
+        <ToggleGroup 
           value={view}
           onChange={(e, newView) => { dispatch(toggleView({ view: newView }))}}
-          exclusive
-        >
-          <ToggleButton value="list" aria-label="list">
-            <ViewListIcon />
-          </ToggleButton>
-          <ToggleButton value="grid" aria-label="grid">
-            <ViewModuleIcon />
-          </ToggleButton>
-        </ToggleButtonGroup>
+        />
       </div>
+
     </div>
     </>
   )

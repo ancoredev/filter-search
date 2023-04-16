@@ -1,7 +1,14 @@
 import React from 'react'
-import { FormControl, Select, MenuItem } from '@mui/material'
+import { FormControl, Select, MenuItem, InputLabel } from '@mui/material'
 
-const SelectBlock = ({ title, handleSelect, value, options }) => {
+const SelectBlock = ({ id, 
+                       label="", 
+                       title="", 
+                       handleSelect, 
+                       value, 
+                       options, 
+                       arrayOptions=false }) => {
+
   return (
     <div className="filter-brand filter-section">
       { 
@@ -9,15 +16,21 @@ const SelectBlock = ({ title, handleSelect, value, options }) => {
       }
       <div className="brand-select">
         <FormControl fullWidth>
+          {
+            label && <InputLabel id={label.trim() + "-select-label"}>{label}</InputLabel>
+          }
           <Select
-            labelId="brand-select-label"
-            id="brand-select"
+            id={id}
+            labelId={label.trim() + "-select-label"}
             value={value}
             onChange={handleSelect}
+            label={label}
             size="small"
           >
             {
-              options.map(item => <MenuItem key={item} value={item}>{item}</MenuItem>)
+              arrayOptions 
+                ? options.map(item => <MenuItem key={item} value={item[0]}>{item[1]}</MenuItem>)
+                : options.map(item => <MenuItem key={item} value={item}>{item}</MenuItem>)
             }
           </Select>
         </FormControl>
