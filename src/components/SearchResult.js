@@ -16,15 +16,10 @@ const SearchResult = () => {
         
       <div className="products">
         <PaginationBlock />
-        
         <div className={ view === "grid" ? "result-content result-content_grid" : "result-content"}>
-        {
-          thisPageProducts.map(item => <Item key={item.id} {...item}/>)
-        }
+        { thisPageProducts.map(item => <Item key={item.id} {...item}/>) }
         </div>
-
         <PaginationBlock />
-
       </div> 
       
     </div>

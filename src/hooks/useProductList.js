@@ -1,13 +1,15 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 
-import { setPageCount, setThisPageProducts } from '../features/productsSlice';
+import { setPageCount, setProductList, setThisPageProducts } from '../features/productsSlice';
 import { addToCategoriesList } from '../features/filterSlice';
+import { calculatePages, loadFilteredProducts } from './../utils/utils';
 
 
 const useProductList = () => {
   const dispatch = useDispatch();
-  const { productsInPage, currentPage } = useSelector(state => state.products);
+  const { productsInPage, currentPage, productList } = useSelector(state => state.products);
+  const { query, priceRange, sortBy, category } = useSelector(state => state.filter);
 
   const skip = productsInPage * (currentPage - 1);
   const url = `https://dummyjson.com/products?limit=${productsInPage}&skip=${skip}`;
@@ -17,11 +19,11 @@ const useProductList = () => {
     fetch(`https://dummyjson.com/products?limit=0`)
       .then(response => response.json())
       .then(json => {
-        dispatch(setPageCount({ 
-          pageCount: json.products.length % productsInPage === 0 
-                        ? json.products.length/productsInPage 
-                        : Math.floor(json.products.length/productsInPage) + 1
-        }));
+        const filtered = loadFilteredProducts(json.products, { query, category, sortBy, priceRange });
+        const count = calculatePages(json.products, productsInPage);
+        dispatch(setProductList({ productList: filtered }));
+        dispatch(setPageCount({ pageCount: count }));
+        dispatch(setThisPageProducts({ thisPageProducts: filtered.slice(skip, skip + productsInPage)}));
       });
 
     fetch('https://dummyjson.com/products/categories')
@@ -31,22 +33,11 @@ const useProductList = () => {
   }, []);
 
   useEffect(() => {
-    fetch(url)
-      .then(response => response.json())
-      .then(json => {
-        dispatch(setThisPageProducts({ thisPageProducts: json.products }));
-      });
-
-  }, [currentPage]);
+    const filtered = loadFilteredProducts(productList, { query, category, sortBy, priceRange });
+    const count = calculatePages(filtered, productsInPage);
+    dispatch(setPageCount({ pageCount: count }));
+    dispatch(setThisPageProducts({ thisPageProducts: filtered.slice(skip, skip + productsInPage)}));
+  }, [currentPage, sortBy, query, priceRange, category]);
 }
 
 export default useProductList
-
-
-// {
-//   thisPageProducts
-//     .filter(item => checkItemIfIncludes(item, query))
-//     .filter(item => checkPriceRange(item, priceRange))
-//     .sort(sortByMethod(sortBy))
-//     .map(item => <Item key={item.id} {...item}/>)
-// }
