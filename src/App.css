@@ -229,4 +229,17 @@ body{
   height: 100%;
 }
 
+/* Pagination */
+
+.products .MuiStack-root {
+  align-items: center;
+}
+
+.products .MuiStack-root:nth-child(1) {
+  margin-bottom: 20px;
+}
+
+.products .MuiStack-root:nth-child(3) {
+  margin-top: 20px;
+}
 

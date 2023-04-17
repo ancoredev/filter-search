@@ -1,7 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  productList: []
+  productList: [],
+  thisPageProducts: [],
+  currentPage: 1,
+  pageCount: 1,
+  productsInPage: 9,
 }
 
 const productsSlice = createSlice({
@@ -11,10 +15,22 @@ const productsSlice = createSlice({
     setProductList: ( state, action ) => {
       state.productList = action.payload.productList;
     },
+    setThisPageProducts: ( state, action ) => {
+      state.thisPageProducts = action.payload.thisPageProducts;
+    },
+    setCurrentPage: ( state, action ) => {
+      state.currentPage = action.payload.currentPage;
+    },
+    setPageCount: ( state, action ) => {
+      state.pageCount = action.payload.pageCount;
+    },
 
   }
 });
 
 
-export const { setProductList } = productsSlice.actions;
+export const { setProductList, 
+               setCurrentPage, 
+               setPageCount,
+               setThisPageProducts } = productsSlice.actions;
 export default productsSlice.reducer;

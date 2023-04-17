@@ -1,16 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 
+const initialState = {
+  query: "",
+  sortBy: "cheap",
+  category: "All categories",
+  categoriesList: ["All categories"],
+  priceRange: [0,2000],
+  view: "grid"
+}
+
 const filterSlice = createSlice({
   name: "filter",
-  initialState: {
-    query: "",
-    sortBy: "cheap",
-    brand: "All brands",
-    brandList: ["All brands"],
-    priceRange: [0,2000],
-    view: "grid"
-  },
+  initialState,
   reducers: {
     handleQuery: ( state, action ) => {
       state.query = action.payload.query;
@@ -18,13 +20,11 @@ const filterSlice = createSlice({
     switchSortMethod: ( state, action ) => {
       state.sortBy = action.payload.sortBy;
     },
-    switchBrandShow: ( state, action ) => {
-      state.brand = action.payload.brand;
+    setCategoryToShow: ( state, action ) => {
+      state.category = action.payload.category;
     },
-    addToBrandList: ( state, action ) => {
-      if (state.brandList.indexOf(action.payload.brand) === -1){
-        state.brandList.push(action.payload.brand);
-      } 
+    addToCategoriesList: ( state, action ) => {
+      state.categoriesList = action.payload.categories;
     },
     setPriceRange: ( state, action ) => {
       if ( action.payload.priceRange[0] > action.payload.priceRange[1]) {
@@ -58,7 +58,7 @@ const filterSlice = createSlice({
 export const { 
   handleQuery, 
   switchSortMethod, 
-  switchBrandShow, addToBrandList, // brand select actions
+  setCategoryToShow, addToCategoriesList, // category select actions
   setPriceRange, setLowerPrice, setUpperPrice,  // price range actions
   toggleView,
   }  = filterSlice.actions;

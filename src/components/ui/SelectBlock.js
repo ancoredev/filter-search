@@ -7,7 +7,7 @@ const SelectBlock = ({ id,
                        handleSelect, 
                        value, 
                        options, 
-                       arrayOptions=false }) => {
+                       doubleArrayOptions=false }) => {
 
   return (
     <div className="filter-brand filter-section">
@@ -28,7 +28,7 @@ const SelectBlock = ({ id,
             size="small"
           >
             {
-              arrayOptions 
+              doubleArrayOptions 
                 ? options.map(item => <MenuItem key={item} value={item[0]}>{item[1]}</MenuItem>)
                 : options.map(item => <MenuItem key={item} value={item}>{item}</MenuItem>)
             }

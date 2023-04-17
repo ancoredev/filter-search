@@ -4,30 +4,29 @@ import Item from './Item'
 
 import { useSelector } from 'react-redux'
 
-import { checkItemBrand, checkItemIfIncludes, checkPriceRange, sortByMethod } from '../utils/utils'
+import PaginationBlock from './PaginationBlock'
 
 const SearchResult = () => {
-  const query = useSelector(state => state.filter.query);
-  const sortBy = useSelector(state => state.filter.sortBy);
-  const brand = useSelector(state => state.filter.brand);
-  const priceRange = useSelector(state => state.filter.priceRange);
+  const thisPageProducts = useSelector(state => state.products.thisPageProducts)
   const view = useSelector(state => state.filter.view);
-  const productList = useSelector(state => state.products.productList)
 
   return (
     <div className="search-result">
       <Filter />
-      <div className={ view === "grid" ? "result-content result-content_grid" : "result-content"}>
+        
+      <div className="products">
+        <PaginationBlock />
+        
+        <div className={ view === "grid" ? "result-content result-content_grid" : "result-content"}>
         {
-          productList
-            .filter(item => checkItemIfIncludes(item, query))
-            .filter(item => checkItemBrand(item, brand))
-            .filter(item => checkPriceRange(item, priceRange))
-            .sort(sortByMethod(sortBy))
-            .map(item => <Item key={item.id} {...item}
-          />)
+          thisPageProducts.map(item => <Item key={item.id} {...item}/>)
         }
-      </div>
+        </div>
+
+        <PaginationBlock />
+
+      </div> 
+      
     </div>
   )
 }

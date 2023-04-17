@@ -6,7 +6,8 @@ import useProductList from './hooks/useProductList';
 
 
 function App() {
-  useProductList("https://dummyjson.com/products?limit=10");
+  
+  useProductList();
 
   return (
     <div className="App">

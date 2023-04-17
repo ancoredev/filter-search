@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { switchBrandShow, 
+import { setCategoryToShow, 
          setPriceRange, 
          setLowerPrice, 
          setUpperPrice, 
@@ -11,11 +11,7 @@ import DoubleRangeSlider from './ui/DoubleRangeSlider'
 import SelectBlock from './ui/SelectBlock'
 
 const Filter = () => {
-  
-  const brandList = useSelector(state => state.filter.brandList);
-  const brand = useSelector(state => state.filter.brand);
-  const priceRange = useSelector(state => state.filter.priceRange);
-  const sortBy = useSelector(state => state.filter.sortBy);
+  const { categoriesList, category, priceRange, sortBy } = useSelector(state => state.filter);
   const dispatch = useDispatch();
 
   return (
@@ -30,10 +26,10 @@ const Filter = () => {
         handleSliderValue={e => dispatch(setPriceRange({priceRange: e.target.value}))}
       />
       <SelectBlock
-        title="Brand"
-        value={brand}
-        handleSelect={e => dispatch(switchBrandShow({brand: e.target.value}))}
-        options={brandList}
+        title="Categories"
+        value={category}
+        handleSelect={e => dispatch(setCategoryToShow({category: e.target.value}))}
+        options={categoriesList}
       />
       <SelectBlock
         title="Sort by"
@@ -44,7 +40,7 @@ const Filter = () => {
           ['expensive', 'Expensive first'],
           ['toprated', 'Toprated first']
         ]}
-        arrayOptions
+        doubleArrayOptions
       />
     </aside>
   )
