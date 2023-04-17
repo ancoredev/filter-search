@@ -135,9 +135,14 @@ body{
   font-weight: 700;
 }
 
-.item__price span {
+.item__price span, .item__category {
   color:#b9b9b9;
   font-weight: 400;
+}
+
+.item__category {
+  margin-bottom: 10px;
+  text-transform: capitalize;
 }
 
 /* item flex */

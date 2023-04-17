@@ -39,26 +39,15 @@ const filterSlice = createSlice({
     setUpperPrice: ( state, action ) => {
       state.priceRange[1] = action.payload.upperPrice;
     },
-    fixLowerPrice: ( state, action ) => {
-      const lowerPrice = action.payload.lowerPrice < 0 ? 0 : action.payload.lowerPrice;
-      if ( lowerPrice > state.priceRange[1]){
-        state.priceRange = [state.priceRange[1], state.priceRange[1]];
-      } else {
-        state.priceRange = [lowerPrice, state.priceRange[1]];
-      }
-    },
-    fixUpperPrice: ( state, action ) => {
-      const upperPrice = action.payload.upperPrice > 2000 ? 2000 : action.payload.upperPrice;
-      if ( upperPrice < state.priceRange[0]){
-        state.priceRange = [state.priceRange[0], state.priceRange[0]];
-      } else {
-        state.priceRange = [state.priceRange[0], upperPrice];
-      }
-    },
-
     toggleView: ( state, action ) => {
       state.view = action.payload.view;
     },
+    clearFilter: ( state, action ) => {
+      state.query = "",
+      state.sortBy = "cheap",
+      state.category = "All categories",
+      state.priceRange = [0,2000]
+    }
   }
 })
 
@@ -68,5 +57,6 @@ export const {
   setCategoryToShow, addToCategoriesList, // category select actions
   setPriceRange, setLowerPrice, setUpperPrice,  // price range actions
   toggleView,
+  clearFilter
   }  = filterSlice.actions;
 export default filterSlice.reducer;

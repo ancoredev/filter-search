@@ -3,7 +3,7 @@ import React from 'react'
 import { Rating, Button } from '@mui/material'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 
-const Item = ({ images, title, brand, rating, description, price }) => {
+const Item = ({ images, title, brand, category, rating, description, price }) => {
   return (
     <div className="item">
 
@@ -24,6 +24,7 @@ const Item = ({ images, title, brand, rating, description, price }) => {
             />
             <span className="item__rate-label">{rating}</span>
           </div>
+          <div className="item__category">{category.replace("-"," ")}</div>
           <div className="item__desc">{description}</div>
         </div> 
 

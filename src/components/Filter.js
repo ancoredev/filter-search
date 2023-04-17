@@ -5,10 +5,12 @@ import { setCategoryToShow,
          setPriceRange, 
          setLowerPrice, 
          setUpperPrice, 
-         switchSortMethod } from '../features/filterSlice'
+         switchSortMethod,
+         clearFilter } from '../features/filterSlice'
 
 import DoubleRangeSlider from './ui/DoubleRangeSlider'
 import SelectBlock from './ui/SelectBlock'
+import { Button } from '@mui/material'
 
 const Filter = () => {
   const { categoriesList, category, priceRange, sortBy } = useSelector(state => state.filter);
@@ -44,6 +46,14 @@ const Filter = () => {
         ]}
         doubleArrayOptions
       />
+      <Button 
+        variant="contained"
+        onClick={() => dispatch(clearFilter())} 
+        disableElevation
+        fullWidth
+      >
+        Clear Filter
+      </Button>
     </aside>
   )
 }
