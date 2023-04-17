@@ -23,7 +23,9 @@ const Filter = () => {
         upperRange={priceRange[1]}
         handleUpperRange={e => dispatch(setUpperPrice({upperPrice: e.target.value}))}
         sliderValue={priceRange}
-        handleSliderValue={e => dispatch(setPriceRange({priceRange: e.target.value}))}
+        handleSliderValue={e => {
+          dispatch(setPriceRange({priceRange: e.target.value}))}
+        }
       />
       <SelectBlock
         title="Categories"

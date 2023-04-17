@@ -28,12 +28,18 @@ const filterSlice = createSlice({
     },
     setPriceRange: ( state, action ) => {
       if ( action.payload.priceRange[0] > action.payload.priceRange[1]) {
-        state.priceRange = [ action.payload.priceRange[1], action.payload.priceRange[0] ]
+        state.priceRange = [ action.payload.priceRange[0], action.payload.priceRange[0] ]
       } else {
         state.priceRange = action.payload.priceRange;
       }
     },
     setLowerPrice: ( state, action ) => {
+      state.priceRange[0] = action.payload.lowerPrice;
+    },
+    setUpperPrice: ( state, action ) => {
+      state.priceRange[1] = action.payload.upperPrice;
+    },
+    fixLowerPrice: ( state, action ) => {
       const lowerPrice = action.payload.lowerPrice < 0 ? 0 : action.payload.lowerPrice;
       if ( lowerPrice > state.priceRange[1]){
         state.priceRange = [state.priceRange[1], state.priceRange[1]];
@@ -41,7 +47,7 @@ const filterSlice = createSlice({
         state.priceRange = [lowerPrice, state.priceRange[1]];
       }
     },
-    setUpperPrice: ( state, action ) => {
+    fixUpperPrice: ( state, action ) => {
       const upperPrice = action.payload.upperPrice > 2000 ? 2000 : action.payload.upperPrice;
       if ( upperPrice < state.priceRange[0]){
         state.priceRange = [state.priceRange[0], state.priceRange[0]];
@@ -49,6 +55,7 @@ const filterSlice = createSlice({
         state.priceRange = [state.priceRange[0], upperPrice];
       }
     },
+
     toggleView: ( state, action ) => {
       state.view = action.payload.view;
     },

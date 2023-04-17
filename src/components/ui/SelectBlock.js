@@ -11,14 +11,10 @@ const SelectBlock = ({ id,
 
   return (
     <div className="filter-brand filter-section">
-      { 
-        title && <p>{title}</p> 
-      }
+      { title && <p>{title}</p> }
       <div className="brand-select">
         <FormControl fullWidth>
-          {
-            label && <InputLabel id={label.trim() + "-select-label"}>{label}</InputLabel>
-          }
+          { label && <InputLabel id={label.trim() + "-select-label"}>{label}</InputLabel> }
           <Select
             id={id}
             labelId={label.trim() + "-select-label"}

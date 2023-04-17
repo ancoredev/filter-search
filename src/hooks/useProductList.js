@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import useDebounce from './useDebounce';
 
 import { setPageCount, setProductList, setThisPageProducts } from '../features/productsSlice';
 import { addToCategoriesList } from '../features/filterSlice';
@@ -11,8 +12,10 @@ const useProductList = () => {
   const { productsInPage, currentPage, productList } = useSelector(state => state.products);
   const { query, priceRange, sortBy, category } = useSelector(state => state.filter);
 
+  const debouncedPriceRange = useDebounce(priceRange, 300);
+  const debouncedQuery = useDebounce(query, 300);
+
   const skip = productsInPage * (currentPage - 1);
-  const url = `https://dummyjson.com/products?limit=${productsInPage}&skip=${skip}`;
 
 
   useEffect(() => {
@@ -33,11 +36,15 @@ const useProductList = () => {
   }, []);
 
   useEffect(() => {
-    const filtered = loadFilteredProducts(productList, { query, category, sortBy, priceRange });
+    const filtered = loadFilteredProducts(productList, { 
+      query: debouncedQuery, 
+      category, 
+      sortBy, 
+      priceRange: debouncedPriceRange });
     const count = calculatePages(filtered, productsInPage);
     dispatch(setPageCount({ pageCount: count }));
     dispatch(setThisPageProducts({ thisPageProducts: filtered.slice(skip, skip + productsInPage)}));
-  }, [currentPage, sortBy, query, priceRange, category]);
+  }, [currentPage, sortBy, debouncedQuery, debouncedPriceRange, category]);
 }
 
 export default useProductList

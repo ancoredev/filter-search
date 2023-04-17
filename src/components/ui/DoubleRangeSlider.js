@@ -3,36 +3,31 @@ import { TextField, Slider } from '@mui/material'
 
 const DoubleRangeSlider = ({
   title,
-  lowerRange, handleLowerRange, 
+  lowerRange, handleLowerRange, fixLowerRange,
   upperRange, handleUpperRange, 
   sliderValue, handleSliderValue }) => {
 
   return (
     <div className="filter__price filter-section">
-      {
-        title && <p>{title}</p>
-      }
+      { title && <p>{title}</p> }
       <div className="input-range">
         <div className="input-range__from">
           <TextField 
-            id="from" 
-            label="From" 
             variant="outlined" 
             size="small"
             value={lowerRange}
-            onBlur={handleLowerRange}
+            onChange={handleLowerRange}
+            onBlur={fixLowerRange}
             type="number"
             fullWidth
           />
         </div>
         <div className="input-range__to">
           <TextField 
-            id="to" 
-            label="To" 
             variant="outlined" 
             size="small"
             value={upperRange}
-            onBlur={handleUpperRange}
+            onChange={handleUpperRange}
             type="number"
             fullWidth
           />
