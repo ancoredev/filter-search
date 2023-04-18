@@ -8,5 +8,8 @@ export default defineConfig(() => ({
     loader: "jsx",
     include: /src\/.*\.jsx?$/,
     exclude: []
+  },
+  build: {
+    outDir: "build"
   }
 }))
