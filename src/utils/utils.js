@@ -28,7 +28,7 @@ export const checkPriceRange = ( { price }, priceRange ) => {
 } 
 
 export const loadFilteredProducts = (products, { query, category, sortBy, priceRange }) => {
-  return (
+  return ( 
     products
       .filter(item => checkItemIfIncludes(item, query))
       .filter(item => checkPriceRange(item, priceRange))
