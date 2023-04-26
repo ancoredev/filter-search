@@ -1,21 +1,22 @@
+import { Route, Routes } from 'react-router-dom';
 import './App.css'
-import SearchBar from './components/SearchBar';
-import SearchResult from './components/SearchResult';
+
 
 import useProductList from './hooks/useProductList';
+import { Layout } from './pages/Layout';
+import { ProductsPage } from './pages/ProductsPage';
 
 
 function App() {
-  
   useProductList();
 
   return (
-    <div className="App">
-      <div className="search-container">
-        <SearchBar />
-        <SearchResult /> 
-      </div>
-    </div>  
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<h1>Home</h1>} />
+        <Route path="products" element={<ProductsPage />} />
+      </Route>  
+    </Routes>
   )
 }
 
