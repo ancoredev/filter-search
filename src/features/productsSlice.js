@@ -24,7 +24,6 @@ const productsSlice = createSlice({
     setPageCount: ( state, action ) => {
       state.pageCount = action.payload.pageCount;
     },
-
   }
 });
 

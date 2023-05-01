@@ -1,9 +1,11 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import { Rating, Button } from '@mui/material'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 
-const Item = ({ images, title, brand, category, rating, description, price }) => {
+const Item = ({ id, images, title, brand, category, rating, description, price }) => {
+  console.log(id)
   return (
     <div className="item">
 
@@ -12,9 +14,11 @@ const Item = ({ images, title, brand, category, rating, description, price }) =>
       </div>
 
       <div className="item__content">
-
+        
         <div className="item__info-group">
-          <p className="item__title">{title} <span>{brand}</span></p>
+          <Link to={String(id)}>
+            <p className="item__title">{title} <span>{brand}</span></p>
+          </Link>
           <div className="item__rate">
             <Rating
               name="simple-controlled"
