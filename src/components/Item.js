@@ -39,7 +39,7 @@ const Item = ({ id, images, title, brand, category, rating, description, price }
               size="small"
               disableElevation
             >Buy</Button>
-            <button className="item__like"><FavoriteBorderIcon/></button>
+            {/* <button className="item__like"><FavoriteBorderIcon/></button> */}
           </div>
           <div className="item__price">
             {price}<span>$</span>

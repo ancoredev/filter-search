@@ -16,7 +16,7 @@ const SingleProductPage = () => {
 
   const goBack = () => {
     handleClose();
-    navigate(-1);
+    navigate("/products");
   }
 
   return (

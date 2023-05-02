@@ -1,22 +1,36 @@
+import { Rating, Button } from '@mui/material';
 import React from 'react'
-import { useNavigate } from 'react-router-dom';
-
-const cardStyle = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  bgcolor: 'background.paper',
-  boxShadow: 24,
-  p: 4,
-};
 
 
-const ProductCard = ({ images, title, brand, category, rating, description, price }) => {
+const ProductCard = ({ images, title, category, rating, description, price, handleClick }) => {
   return (
     <article className="product">
-      <h2>{title}</h2>
-      <p>{category}</p>
+      <h2 className="product__title">{title}</h2>
+      <p className="product__category">{category}</p>
+      <div className="product-content">
+        <div className="img-container">
+          <img src={images[0]} alt="" />
+        </div>
+        <div className="info-container">
+          <div className="top-group">
+            <p className="description">{description}</p>
+            <Rating
+              name="simple-controlled"
+              value={rating}
+              precision={0.1}
+              readOnly
+            />
+          </div>
+          <div className="bottom-group">
+            <div className="product-price">{price}<span>$</span> </div>
+            <Button 
+              variant="contained" 
+              size="small"
+              disableElevation
+            >Buy</Button>
+          </div>
+        </div>
+      </div>
     </article>
   )
 }
