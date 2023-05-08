@@ -10,7 +10,8 @@ body{
 
 .App {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 .search-container {
@@ -292,7 +293,14 @@ article.product p.product__category {
   justify-content: space-between;
   align-items: top;
 }
-
+.rating {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.rating span.rating__text {
+  margin-left: 15px;
+}
 .product-content .img-container, .product-content .info-container {
   width: calc(50% - 10px);
 }
@@ -321,4 +329,18 @@ article.product p.product__category {
 
 .product-price span {
   color: #b9b9b9
+}
+
+/* header */
+header {
+  width: 1180px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+header nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }

@@ -6,6 +6,7 @@ import useProductList from './hooks/useProductList';
 import { Layout } from './pages/Layout';
 import { ProductsPage } from './pages/ProductsPage';
 import { SingleProductPage } from './pages/SingleProductPage';
+import { CartPage } from './pages/CartPage';
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route path="products/" element={<ProductsPage />}>
           <Route path=":id" element={<SingleProductPage />} />
         </Route>
+        <Route path="cart" element={<CartPage/>} />
       </Route>
     </Routes>
   )

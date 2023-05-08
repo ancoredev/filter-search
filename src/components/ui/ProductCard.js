@@ -14,12 +14,15 @@ const ProductCard = ({ images, title, category, rating, description, price, hand
         <div className="info-container">
           <div className="top-group">
             <p className="description">{description}</p>
-            <Rating
-              name="simple-controlled"
-              value={rating}
-              precision={0.1}
-              readOnly
-            />
+            <div className="rating">
+              <Rating
+                name="simple-controlled"
+                value={rating}
+                precision={0.1}
+                readOnly
+              />
+              <span className="rating__text">{rating}</span>
+            </div>
           </div>
           <div className="bottom-group">
             <div className="product-price">{price}<span>$</span> </div>

@@ -20,7 +20,6 @@ const SingleProductPage = () => {
   }
 
   return (
-
     <Modal isOpen={open} onClose={goBack}>
       { product && <ProductCard {...product}/> }
     </Modal>
