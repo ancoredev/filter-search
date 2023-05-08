@@ -1,5 +1,5 @@
 # filter-search
-## Live-demo
+## Live-demo (will be up soon after updates)
 https://ancoredev.github.io/filter-search/
 
 ## In Dev
