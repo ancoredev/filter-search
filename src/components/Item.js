@@ -1,11 +1,12 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import { Rating, Button } from '@mui/material'
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
+import { addToCart } from '../features/cartSlice'
 
 const Item = ({ id, images, title, brand, category, rating, description, price }) => {
-  console.log(id)
+  const dispatch = useDispatch();
   return (
     <div className="item">
 
@@ -37,6 +38,7 @@ const Item = ({ id, images, title, brand, category, rating, description, price }
             <Button 
               variant="contained" 
               size="small"
+              onClick={() => dispatch(addToCart({product: { id, images, brand, title, price, quantity: 1 }}))}
               disableElevation
             >Buy</Button>
             {/* <button className="item__like"><FavoriteBorderIcon/></button> */}

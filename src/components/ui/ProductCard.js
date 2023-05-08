@@ -1,7 +1,6 @@
 import { Rating, Button } from '@mui/material';
 import React from 'react'
 
-
 const ProductCard = ({ images, title, category, rating, description, price, handleClick }) => {
   return (
     <article className="product">
@@ -29,6 +28,7 @@ const ProductCard = ({ images, title, category, rating, description, price, hand
             <Button 
               variant="contained" 
               size="small"
+              onClick={handleClick}
               disableElevation
             >Buy</Button>
           </div>
